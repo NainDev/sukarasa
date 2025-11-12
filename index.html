@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10 Rekomendasi Tempat Nongkrong Hits di Jakarta - InfoBerita</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'news-blue': '#2563EB',
+                        'news-light': '#DBEAFE',
+                        'news-dark': '#1E40AF'
+                    },
+                    fontFamily: {
+                        'poppins': ['Poppins', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #2563EB 0%, #1E40AF 100%);
+        }
+
+        .share-button {
+            transition: all 0.3s ease;
+        }
+
+        .share-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-in {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .article-content img {
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .place-card {
+            transition: all 0.3s ease;
+        }
+
+        .place-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="gradient-bg fixed top-0 left-0 right-0 z-50 shadow-xl">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-newspaper text-white text-3xl"></i>
+                    <span class="text-white text-2xl font-bold">sukarasa</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-white hover:text-news-light transition-colors font-medium">Beranda</a>
+                    <a href="#" class="text-white hover:text-news-light transition-colors font-medium">Berita</a>
+                    <a href="#" class="text-white hover:text-news-light transition-colors font-medium">Lifestyle</a>
+                    <a href="#" class="text-white hover:text-news-light transition-colors font-medium">Kuliner</a>
+                    <a href="#" class="text-white hover:text-news-light transition-colors font-medium">Kontak</a>
+                </div>
+
+                <button class="md:hidden text-white text-2xl" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full gradient-bg z-40 transform -translate-x-full transition-transform duration-300">
+        <div class="flex justify-end p-6">
+            <button class="text-white text-3xl" onclick="toggleMobileMenu()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="flex flex-col items-center space-y-8 mt-12">
+            <a href="#" onclick="toggleMobileMenu()" class="text-white text-2xl font-semibold hover:text-news-light transition-colors">Beranda</a>
+            <a href="#" onclick="toggleMobileMenu()" class="text-white text-2xl font-semibold hover:text-news-light transition-colors">Berita</a>
+            <a href="#" onclick="toggleMobileMenu()" class="text-white text-2xl font-semibold hover:text-news-light transition-colors">Lifestyle</a>
+            <a href="#" onclick="toggleMobileMenu()" class="text-white text-2xl font-semibold hover:text-news-light transition-colors">Kuliner</a>
+            <a href="#" onclick="toggleMobileMenu()" class="text-white text-2xl font-semibold hover:text-news-light transition-colors">Kontak</a>
+        </div>
+    </div>
+
+    <!-- Article Header -->
+    <div class="pt-24 pb-8 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <!-- Category Badge -->
+            <div class="mb-4">
+                <span class="inline-block bg-news-blue text-white px-4 py-2 rounded-full text-sm font-semibold">
+                    <i class="fas fa-coffee mr-2"></i>LIFESTYLE
+                </span>
+            </div>
+
+            <!-- Article Title -->
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+                10 Rekomendasi Tempat Nongkrong Hits di Jakarta untuk Weekend Seru!
+            </h1>
+
+            <!-- Article Meta Info -->
+            <div class="flex flex-wrap items-center text-gray-600 text-sm mb-6 gap-4">
+                <div class="flex items-center">
+                    <img src="https://i.pravatar.cc/40?img=12" alt="Author" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <p class="font-semibold text-gray-900">Rina Kusuma</p>
+                        <p class="text-xs">Penulis Lifestyle</p>
+                    </div>
+                </div>
+                <div class="flex items-center">
+                    <i class="far fa-calendar text-news-blue mr-2"></i>
+                    <span>11 November 2025</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="far fa-clock text-news-blue mr-2"></i>
+                    <span>8 menit baca</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="far fa-eye text-news-blue mr-2"></i>
+                    <span>15.234 views</span>
+                </div>
+            </div>
+
+            <!-- Share Buttons -->
+            <div class="flex items-center space-x-3 pb-6 border-b border-gray-200">
+                <span class="font-semibold text-gray-700">Bagikan:</span>
+                <button onclick="shareToFacebook()" class="share-button bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">
+                    <i class="fab fa-facebook-f mr-2"></i>Facebook
+                </button>
+                <button onclick="shareToTwitter()" class="share-button bg-sky-500 text-white px-4 py-2 rounded-lg hover:bg-sky-600">
+                    <i class="fab fa-twitter mr-2"></i>Twitter
+                </button>
+                <button onclick="shareToWhatsApp()" class="share-button bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">
+                    <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                </button>
+                <button onclick="copyLink()" class="share-button bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700">
+                    <i class="fas fa-link mr-2"></i>Salin Link
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <article class="bg-white py-8">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <!-- Thumbnail Image (16:9) -->
+            <div class="mb-8 animate-fade-in">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200&h=675&fit=crop" 
+                     alt="Tempat Nongkrong" 
+                     class="w-full h-auto rounded-2xl shadow-lg">
+                <p class="text-sm text-gray-500 mt-3 text-center italic">Suasana hangout spot modern di Jakarta</p>
+            </div>
+
+            <!-- Introduction -->
+            <div class="article-content prose prose-lg max-w-none mb-12">
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Jakarta sebagai ibukota Indonesia menawarkan banyak sekali pilihan tempat nongkrong yang keren dan instagramable. 
+                    Dari kafe minimalis hingga rooftop dengan pemandangan kota, semua ada di sini. Berikut adalah 10 rekomendasi 
+                    tempat nongkrong hits yang wajib kamu kunjungi untuk mengisi waktu weekend atau sekadar melepas penat!
+                </p>
+                
+                <p class="text-lg text-gray-700 leading-relaxed mb-8">
+                    Setiap tempat memiliki keunikan dan daya tariknya masing-masing. Yuk, simak daftarnya!
+                </p>
+            </div>
+
+            <!-- Place Recommendations -->
+            <div class="space-y-12">
+                <!-- Place 1 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">1</div>
+                        <h2 class="text-2xl font-bold text-gray-900">Kopi Kenangan Premium</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800&h=500&fit=crop" 
+                         alt="Kopi Kenangan" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Kopi Kenangan Premium menawarkan konsep kafe modern dengan interior yang aesthetic. Tempatnya cozy banget 
+                        dengan sofa empuk dan pencahayaan yang pas untuk foto-foto. Menu andalannya adalah Es Kopi Susu Tetangga 
+                        yang legendaris!
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Senopati, Jakarta Selatan
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 25.000 - Rp 50.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.5/5 - 2,340 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 2 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">2</div>
+                        <h2 class="text-2xl font-bold text-gray-900">Anomali Coffee PIK</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800&h=500&fit=crop" 
+                         alt="Anomali Coffee" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Berlokasi di kawasan PIK yang hits, Anomali Coffee menjadi salah satu destinasi wajib buat coffee lovers. 
+                        Dengan konsep industrial-chic, tempat ini cocok banget buat kerja atau meeting santai. Kopi single origin-nya 
+                        berkualitas tinggi dengan barista profesional.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>PIK, Jakarta Utara
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 35.000 - Rp 65.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.8/5 - 1,890 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 3 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">3</div>
+                        <h2 class="text-2xl font-bold text-gray-900">SKYE Bar & Restaurant</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800&h=500&fit=crop" 
+                         alt="SKYE Bar" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Rooftop bar dengan view Jakarta 360 derajat yang stunning! SKYE ada di lantai 56 gedung BCA, cocok banget 
+                        buat dinner romantis atau celebrate special moments. Suasana mewah dengan live music setiap malam. Menu 
+                        western dan fusion-nya juga recommended!
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Grand Indonesia, Jakarta Pusat
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 200.000 - Rp 500.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.9/5 - 3,120 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 4 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">4</div>
+                        <h2 class="text-2xl font-bold text-gray-900">The Goods Diner</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=500&fit=crop" 
+                         alt="The Goods Diner" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Diner bergaya American classic dengan interior retro yang super instagramable! The Goods Diner terkenal 
+                        dengan burger jumbo dan milkshake-nya yang creamy. Vibes-nya casual tapi tetap stylish, cocok buat hangout 
+                        sama teman-teman atau keluarga.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Kemang, Jakarta Selatan
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 75.000 - Rp 150.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.6/5 - 1,567 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 5 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">5</div>
+                        <h2 class="text-2xl font-bold text-gray-900">Tugu Kunstkring Paleis</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&h=500&fit=crop" 
+                         alt="Tugu Kunstkring" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Bangunan bersejarah dengan arsitektur kolonial yang memukau! Tugu Kunstkring menawarkan pengalaman fine dining 
+                        dengan sentuhan seni dan budaya Indonesia. Interior-nya penuh dengan ornamen antik dan lukisan klasik. Perfect 
+                        buat special occasion!
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Menteng, Jakarta Pusat
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 250.000 - Rp 600.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.9/5 - 2,789 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 6 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">6</div>
+                        <h2 class="text-2xl font-bold text-gray-900">Pison Coffee</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?w=800&h=500&fit=crop" 
+                         alt="Pison Coffee" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Hidden gem untuk pecinta kopi specialty! Pison Coffee punya konsep minimalis Jepang yang calming. Mereka roasting 
+                        sendiri biji kopinya, jadi freshness terjamin. Ada berbagai single origin dari seluruh Indonesia. Tempat yang 
+                        tenang buat work from cafe.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Tebet, Jakarta Selatan
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 30.000 - Rp 55.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.8/5 - 1,234 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 7 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">7</div>
+                        <h2 class="text-2xl font-bold text-gray-900">Cork&***** Country Club</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&h=500&fit=crop" 
+                         alt="Cork&*****" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Bistro dengan konsep garden outdoor yang refreshing! Cork&***** punya area outdoor yang luas dengan 
+                        dekorasi lampu gantung yang romantic. Menu wine dan cheese-nya lengkap. Cocok banget buat weekend brunch 
+                        atau evening drinks with friends.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Kemang, Jakarta Selatan
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 150.000 - Rp 350.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.7/5 - 1,945 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 8 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">8</div>
+                        <h2 class="text-2xl font-bold text-gray-900">Haijoo! Korean Grill & Hotpot</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1552566626-52f8b828add9?w=800&h=500&fit=crop" 
+                         alt="Haijoo" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        All-you-can-eat Korean BBQ dengan sistem buffet yang lengkap! Haijoo menawarkan daging premium dan side dish 
+                        unlimited. Interior-nya modern Korea banget dengan private booth. Sauce bar-nya juga banyak pilihan. Must try 
+                        buat pecinta Korean food!
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Central Park Mall, Jakarta Barat
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 180.000 - Rp 280.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.6/5 - 2,456 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 9 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">9</div>
+                        <h2 class="text-2xl font-bold text-gray-900">Paviliun 28</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=500&fit=crop" 
+                         alt="Paviliun 28" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Restoran fine dining dengan suasana pavilion yang elegan! Paviliun 28 terkenal dengan menu fusion Western-Asian 
+                        yang unik. Tempatnya private dengan garden view yang asri. Ada area outdoor dan indoor yang sama-sama nyaman. 
+                        Pilihan tepat untuk business lunch atau family gathering.
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Wijaya, Jakarta Selatan
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 200.000 - Rp 450.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.8/5 - 1,678 reviews)</span>
+                    </div>
+                </div>
+
+                <!-- Place 10 -->
+                <div class="place-card bg-gray-50 rounded-2xl p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 gradient-bg rounded-full flex items-center justify-center text-white font-bold text-xl mr-4">10</div>
+                        <h2 class="text-2xl font-bold text-gray-900">Cloud Lounge & Living Room</h2>
+                    </div>
+                    <img src="https://images.unsplash.com/photo-1533777324565-a040eb52facd?w=800&h=500&fit=crop" 
+                         alt="Cloud Lounge" 
+                         class="w-full h-64 object-cover rounded-xl mb-4">
+                    <p class="text-gray-700 leading-relaxed mb-3">
+                        Rooftop lounge di lantai 46 dengan view city lights yang spectacular! Cloud Lounge punya ambiance yang intimate 
+                        dengan live DJ setiap weekend. Menu cocktail dan mocktail-nya creative. Interior-nya luxury modern dengan sofa 
+                        comfortable. Best spot untuk celebrate atau date night!
+                    </p>
+                    <div class="flex flex-wrap gap-3 mb-3">
+                        <span class="bg-news-light text-news-blue px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-map-marker-alt mr-1"></i>Kota Kasablanka, Jakarta Selatan
+                        </span>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-semibold">
+                            <i class="fas fa-dollar-sign mr-1"></i>Rp 150.000 - Rp 400.000
+                        </span>
+                    </div>
+                    <div class="flex items-center text-yellow-500">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span class="text-gray-600 ml-2 text-sm">(4.7/5 - 2,123 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conclusion -->
+            <div class="mt-12 bg-news-light rounded-2xl p-8">
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                    <i class="fas fa-lightbulb text-news-blue mr-2"></i>Kesimpulan
+                </h3>
+                <p class="text-gray-700 leading-relaxed mb-4">
+                    Jakarta memang tidak pernah kehabisan pilihan tempat nongkrong yang menarik! Dari kafe cozy hingga rooftop 
+                    mewah, semuanya bisa disesuaikan dengan budget dan preferensi kamu. Setiap tempat punya karakteristik unik 
+                    yang membuat pengalaman hangout jadi lebih berkesan.
+                </p>
+                <p class="text-gray-700 leading-relaxed">
+                    Jangan lupa untuk booking terlebih dahulu terutama untuk restoran dan bar mewah di weekend. Selamat menjelajahi 
+                    dan mencoba tempat-tempat keren ini! Happy hanging out! 🎉
+                </p>
+            </div>
+
+            <!-- Tags -->
+            <div class="mt-8 flex flex-wrap gap-2">
+                <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    #TempatNongkrong
+                </span>
+                <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    #JakartaLifestyle
+                </span>
+                <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    #KafeJakarta
+                </span>
+                <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    #RooftopJakarta
+                </span>
+                <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    #Kuliner
+                </span>
+                <span class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full text-sm font-semibold">
+                    #WeekendVibes
+                </span>
+            </div>
+
+            <!-- Share Again -->
+            <div class="mt-8 border-t border-gray-200 pt-8">
+                <p class="text-gray-700 font-semibold mb-4">Bagikan artikel ini ke teman-teman kamu:</p>
+                <div class="flex flex-wrap gap-3">
+                    <button onclick="shareToFacebook()" class="share-button bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 flex items-center">
+                        <i class="fab fa-facebook-f mr-2"></i>Facebook
+                    </button>
+                    <button onclick="shareToTwitter()" class="share-button bg-sky-500 text-white px-6 py-3 rounded-lg hover:bg-sky-600 flex items-center">
+                        <i class="fab fa-twitter mr-2"></i>Twitter
+                    </button>
+                    <button onclick="shareToWhatsApp()" class="share-button bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>WhatsApp
+                    </button>
+                    <button onclick="shareToLinkedIn()" class="share-button bg-blue-700 text-white px-6 py-3 rounded-lg hover:bg-blue-800 flex items-center">
+                        <i class="fab fa-linkedin-in mr-2"></i>LinkedIn
+                    </button>
+                    <button onclick="copyLink()" class="share-button bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 flex items-center">
+                        <i class="fas fa-link mr-2"></i>Salin Link
+                    </button>
+                </div>
+            </div>
+
+            <!-- Author Bio -->
+            <div class="mt-12 bg-white border-2 border-gray-200 rounded-2xl p-6 flex items-start gap-6">
+                <img src="https://i.pravatar.cc/100?img=12" alt="Rina Kusuma" class="w-24 h-24 rounded-full">
+                <div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-2">Rina Kusuma</h4>
+                    <p class="text-news-blue font-semibold mb-3">Penulis Lifestyle & Kuliner</p>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Rina adalah seorang food blogger dan lifestyle enthusiast yang ***** menjelajahi tempat-tempat keren 
+                        di Jakarta. Dengan pengalaman lebih dari 5 tahun di dunia kuliner, ia selalu berbagi rekomendasi 
+                        terbaik untuk para pembaca.
+                    </p>
+                    <div class="flex gap-3">
+                        <a href="#" class="text-news-blue hover:text-news-dark transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-news-blue hover:text-news-dark transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-news-blue hover:text-news-dark transition-colors">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Articles -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-900 mb-6">Artikel Terkait</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Related Article 1 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=250&fit=crop" 
+                             alt="Kuliner Jakarta" 
+                             class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs bg-news-light text-news-blue px-2 py-1 rounded-full font-semibold">KULINER</span>
+                            <h4 class="font-bold text-gray-900 mt-2 mb-2 line-clamp-2">
+                                15 Kuliner Khas Jakarta yang Wajib Dicoba
+                            </h4>
+                            <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                                Dari kerak telor hingga soto betawi, ini dia kuliner legendaris Jakarta...
+                            </p>
+                            <a href="#" class="text-news-blue font-semibold text-sm hover:underline">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Related Article 2 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=400&h=250&fit=crop" 
+                             alt="Wisata Jakarta" 
+                             class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs bg-news-light text-news-blue px-2 py-1 rounded-full font-semibold">TRAVEL</span>
+                            <h4 class="font-bold text-gray-900 mt-2 mb-2 line-clamp-2">
+                                Destinasi Wisata Hits di Jakarta untuk Weekend
+                            </h4>
+                            <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                                Liburan di Jakarta bisa seru! Ini dia rekomendasi tempat wisata...
+                            </p>
+                            <a href="#" class="text-news-blue font-semibold text-sm hover:underline">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Related Article 3 -->
+                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop" 
+                             alt="Cafe Aesthetic" 
+                             class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <span class="text-xs bg-news-light text-news-blue px-2 py-1 rounded-full font-semibold">LIFESTYLE</span>
+                            <h4 class="font-bold text-gray-900 mt-2 mb-2 line-clamp-2">
+                                Cafe Aesthetic di Jakarta untuk Konten Instagram
+                            </h4>
+                            <p class="text-sm text-gray-600 mb-3 line-clamp-2">
+                                Butuh background foto yang aesthetic? Coba ke cafe-cafe ini...
+                            </p>
+                            <a href="#" class="text-news-blue font-semibold text-sm hover:underline">
+                                Baca Selengkapnya <i class="fas fa-arrow-right ml-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-12 mt-16">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <i class="fas fa-newspaper text-4xl"></i>
+                        <span class="font-bold text-2xl">InfoBerita</span>
+                    </div>
+                    <p class="text-news-light">
+                        Portal berita terpercaya yang menyajikan informasi terkini seputar lifestyle, kuliner, 
+                        travel, dan berita menarik lainnya.
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Kategori</h3>
+                    <ul class="space-y-2 text-news-light">
+                        <li><a href="#" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Berita Utama</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Lifestyle</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Kuliner</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Travel</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Teknologi</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Hubungi Kami</h3>
+                    <div class="space-y-3 text-news-light">
+                        <p><i class="fas fa-envelope mr-2"></i> info@infoberita.id</p>
+                        <p><i class="fas fa-phone mr-2"></i> +62 21 1234 5678</p>
+                        <p><i class="fas fa-map-marker-alt mr-2"></i> Jakarta, Indonesia</p>
+                        <p><i class="fas fa-clock mr-2"></i> Sen - Jum: 09.00 - 18.00</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-4">Ikuti Kami</h3>
+                    <div class="flex flex-wrap gap-3 mb-4">
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white bg-opacity-20 rounded-full flex items-center justify-center hover:bg-opacity-30 transition-all">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                    <p class="text-news-light text-sm">
+                        Dapatkan update berita terbaru dengan mengikuti media sosial kami!
+                    </p>
+                </div>
+            </div>
+            
+            <div class="border-t border-white border-opacity-20 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center text-news-light">
+                    <p>&copy; 2025 InfoBerita. All rights reserved.</p>
+                    <div class="flex gap-6 mt-4 md:mt-0">
+                        <a href="#" class="hover:text-white transition-colors">Kebijakan Privasi</a>
+                        <a href="#" class="hover:text-white transition-colors">Syarat & Ketentuan</a>
+                        <a href="#" class="hover:text-white transition-colors">Tentang Kami</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" 
+            onclick="scrollToTop()" 
+            class="hidden fixed bottom-8 right-8 w-14 h-14 gradient-bg rounded-full text-white shadow-2xl hover:shadow-news-blue/50 transition-all transform hover:scale-110 z-50">
+        <i class="fas fa-arrow-up text-xl"></i>
+    </button>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/6282123456789" 
+       target="_blank" 
+       class="fixed bottom-24 right-8 w-14 h-14 bg-green-500 rounded-full flex items-center justify-center text-white text-2xl shadow-2xl hover:bg-green-600 transition-all transform hover:scale-110 z-50">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('-translate-x-full');
+        }
+
+        // Share Functions
+        function shareToFacebook() {
+            const url = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent('10 Rekomendasi Tempat Nongkrong Hits di Jakarta');
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank', 'width=600,height=400');
+            showNotification('Membuka Facebook untuk berbagi artikel...');
+        }
+
+        function shareToTwitter() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('10 Rekomendasi Tempat Nongkrong Hits di Jakarta untuk Weekend Seru! 🎉');
+            window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank', 'width=600,height=400');
+            showNotification('Membuka Twitter untuk berbagi artikel...');
+        }
+
+        function shareToWhatsApp() {
+            const url = encodeURIComponent(window.location.href);
+            const text = encodeURIComponent('Cek artikel keren ini: 10 Rekomendasi Tempat Nongkrong Hits di Jakarta! 🎉');
+            window.open(`https://wa.me/?text=${text}%20${url}`, '_blank');
+            showNotification('Membuka WhatsApp untuk berbagi artikel...');
+        }
+
+        function shareToLinkedIn() {
+            const url = encodeURIComponent(window.location.href);
+            window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank', 'width=600,height=400');
+            showNotification('Membuka LinkedIn untuk berbagi artikel...');
+        }
+
+        function copyLink() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('✅ Link artikel berhasil disalin ke clipboard!');
+            }).catch(() => {
+                // Fallback untuk browser yang tidak support clipboard API
+                const textarea = document.createElement('textarea');
+                textarea.value = url;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showNotification('✅ Link artikel berhasil disalin!');
+            });
+        }
+
+        // Notification Function
+        function showNotification(message) {
+            // Cek jika sudah ada notifikasi, hapus dulu
+            const existingNotif = document.getElementById('notification');
+            if (existingNotif) {
+                existingNotif.remove();
+            }
+
+            // Buat notifikasi baru
+            const notification = document.createElement('div');
+            notification.id = 'notification';
+            notification.className = 'fixed top-24 right-8 bg-white shadow-2xl rounded-xl p-4 z-50 max-w-sm animate-fade-in';
+            notification.innerHTML = `
+                <div class="flex items-start gap-3">
+                    <div class="text-news-blue text-2xl">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-gray-800 font-medium">${message}</p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(notification);
+
+            // Auto remove setelah 3 detik
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.style.opacity = '0';
+                    notification.style.transform = 'translateX(100%)';
+                    notification.style.transition = 'all 0.3s ease';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 3000);
+        }
+
+        // Scroll to Top
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/Hide Scroll to Top Button
+        window.addEventListener('scroll', function() {
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.remove('hidden');
+            } else {
+                scrollTopBtn.classList.add('hidden');
+            }
+        });
+
+        // Smooth scroll untuk anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update view count (simulasi)
+        window.addEventListener('load', function() {
+            console.log('Artikel berhasil dimuat!');
+            console.log('Semua elemen berfungsi dengan baik ✅');
+        });
+    </script>
+</body>
+</html>
