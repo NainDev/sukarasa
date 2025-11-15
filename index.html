@@ -65,24 +65,47 @@
             100% { transform: translateX(-100%); }
         }
 
-        .category-chip {
-            transition: all 0.3s ease;
-        }
-
-        .category-chip:hover {
-            transform: scale(1.05);
-        }
-
         .hero-overlay {
             background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
         }
 
-        .search-input {
-            transition: all 0.3s ease;
+        .scroll-container {
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #2563EB #f1f5f9;
         }
 
-        .search-input:focus {
-            width: 300px;
+        .scroll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 10px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #2563EB;
+            border-radius: 10px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #1E40AF;
+        }
+
+        .search-slide-down {
+            animation: slideDown 0.3s ease-out forwards;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -111,21 +134,34 @@
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
+        </div>
+    </nav>
 
-            <!-- Search Bar -->
-            <div id="searchBar" class="hidden mt-4 animate-fade-in">
-                <div class="relative">
-                    <input type="text" 
-                           placeholder="Cari berita..." 
-                           class="w-full px-4 py-3 pr-12 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-                           onkeypress="handleSearch(event)">
-                    <button onclick="performSearch()" class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-news-blue text-white w-10 h-10 rounded-full hover:bg-news-dark transition-colors">
-                        <i class="fas fa-search"></i>
+    <!-- Search Bar (Hidden by default) -->
+    <div id="searchBar" class="hidden fixed top-20 left-0 right-0 z-40 bg-white shadow-lg search-slide-down">
+        <div class="container mx-auto px-6 py-4">
+            <div class="relative max-w-3xl mx-auto">
+                <input type="text" 
+                       id="searchInput"
+                       placeholder="Cari berita, kategori, atau topik..." 
+                       class="w-full px-6 py-4 pr-32 rounded-full border-2 border-news-blue text-gray-900 focus:outline-none focus:ring-2 focus:ring-news-blue"
+                       onkeypress="handleSearch(event)">
+                <div class="absolute right-2 top-1/2 transform -translate-y-1/2 flex gap-2">
+                    <button onclick="performSearch()" class="bg-news-blue text-white px-6 py-2 rounded-full hover:bg-news-dark transition-colors font-medium">
+                        <i class="fas fa-search mr-2"></i>Cari
+                    </button>
+                    <button onclick="toggleSearch()" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-full hover:bg-gray-300 transition-colors">
+                        <i class="fas fa-times"></i>
                     </button>
                 </div>
             </div>
+            <!-- Search Results Preview -->
+            <div id="searchResults" class="hidden mt-4 max-w-3xl mx-auto bg-white rounded-lg shadow-md p-4">
+                <div class="text-sm text-gray-600 mb-2">Hasil pencarian untuk: <span id="searchQuery" class="font-bold text-gray-900"></span></div>
+                <div id="searchResultsList" class="space-y-2"></div>
+            </div>
         </div>
-    </nav>
+    </div>
 
     <!-- Mobile Menu -->
     <div id="mobileMenu" class="fixed top-0 left-0 w-full h-full gradient-bg z-40 transform -translate-x-full transition-transform duration-300">
@@ -165,7 +201,7 @@
         <div class="container mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-6">
                 <!-- Main Featured -->
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl card-hover cursor-pointer group" onclick="openArticle('featured-1')">
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl card-hover cursor-pointer group" onclick="goToArticle('featured-1')">
                     <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop" 
                          alt="Featured" 
                          class="w-full h-[500px] object-cover transition-transform duration-500 group-hover:scale-110">
@@ -187,7 +223,7 @@
 
                 <!-- Side Featured -->
                 <div class="grid grid-rows-2 gap-6">
-                    <div class="relative rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer group" onclick="openArticle('featured-2')">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer group" onclick="goToArticle('featured-2')">
                         <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&h=300&fit=crop" 
                              alt="Kuliner" 
                              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
@@ -203,7 +239,7 @@
                         </div>
                     </div>
 
-                    <div class="relative rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer group" onclick="openArticle('featured-3')">
+                    <div class="relative rounded-2xl overflow-hidden shadow-xl card-hover cursor-pointer group" onclick="goToArticle('featured-3')">
                         <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&h=300&fit=crop" 
                              alt="Travel" 
                              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
@@ -223,36 +259,7 @@
         </div>
     </section>
 
-    <!-- Category Filter -->
-    <section class="py-6 bg-white shadow-md sticky top-20 z-40">
-        <div class="container mx-auto px-6">
-            <div class="flex items-center gap-3 overflow-x-auto pb-2">
-                <button onclick="filterCategory('semua')" class="category-chip bg-news-blue text-white px-6 py-2 rounded-full font-semibold whitespace-nowrap flex-shrink-0">
-                    <i class="fas fa-th mr-2"></i>Semua
-                </button>
-                <button onclick="filterCategory('berita')" class="category-chip bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-gray-300 whitespace-nowrap flex-shrink-0">
-                    <i class="fas fa-newspaper mr-2"></i>Berita
-                </button>
-                <button onclick="filterCategory('lifestyle')" class="category-chip bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-gray-300 whitespace-nowrap flex-shrink-0">
-                    <i class="fas fa-coffee mr-2"></i>Lifestyle
-                </button>
-                <button onclick="filterCategory('kuliner')" class="category-chip bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-gray-300 whitespace-nowrap flex-shrink-0">
-                    <i class="fas fa-utensils mr-2"></i>Kuliner
-                </button>
-                <button onclick="filterCategory('travel')" class="category-chip bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-gray-300 whitespace-nowrap flex-shrink-0">
-                    <i class="fas fa-plane mr-2"></i>Travel
-                </button>
-                <button onclick="filterCategory('teknologi')" class="category-chip bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-gray-300 whitespace-nowrap flex-shrink-0">
-                    <i class="fas fa-laptop mr-2"></i>Teknologi
-                </button>
-                <button onclick="filterCategory('olahraga')" class="category-chip bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-gray-300 whitespace-nowrap flex-shrink-0">
-                    <i class="fas fa-futbol mr-2"></i>Olahraga
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Latest News Section -->
+    <!-- Latest News Section - Grid 16:9 -->
     <section id="terkini" class="py-12">
         <div class="container mx-auto px-6">
             <div class="flex items-center justify-between mb-8">
@@ -264,212 +271,153 @@
                 </button>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-6" id="newsGrid">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="newsGrid">
                 <!-- News Card 1 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover cursor-pointer" onclick="openArticle('news-1')" data-category="lifestyle">
-                    <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=250&fit=crop" 
-                         alt="News 1" 
-                         class="w-full h-48 object-cover">
-                    <div class="p-5">
-                        <span class="inline-block bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                            <i class="fas fa-coffee mr-1"></i>LIFESTYLE
+                <a href="article.html?id=news-1" class="bg-white rounded-lg shadow-md overflow-hidden card-hover block" data-category="lifestyle" data-title="Cafe Aesthetic di Jakarta untuk Konten Instagram">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=400&h=225&fit=crop" 
+                             alt="News 1" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="inline-block bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-semibold mb-2">
+                            LIFESTYLE
                         </span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
-                            Cafe Aesthetic di Jakarta untuk Konten Instagram
+                        <h3 class="font-bold text-base text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
+                            Workout Routine untuk Pemula di Rumah
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                            Butuh background foto yang aesthetic? Coba ke cafe-cafe hits ini yang dijamin bikin feed Instagram kamu kece!
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-gray-500">
-                            <span><i class="far fa-calendar mr-1"></i>10 Nov 2025</span>
-                            <span><i class="far fa-eye mr-1"></i>8.5K views</span>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span><i class="far fa-calendar mr-1"></i>31 Okt 2025</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- News Card 2 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover cursor-pointer" onclick="openArticle('news-2')" data-category="kuliner">
-                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=250&fit=crop" 
-                         alt="News 2" 
-                         class="w-full h-48 object-cover">
-                    <div class="p-5">
-                        <span class="inline-block bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                            <i class="fas fa-utensils mr-1"></i>KULINER
-                        </span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
-                            Rekomendasi Restoran All You Can Eat Terbaik
+                <a href="article.html?id=lifestyle-4" class="flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?w=400&h=225&fit=crop" alt="Lifestyle" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="inline-block bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-semibold mb-2">LIFESTYLE</span>
+                        <h3 class="font-bold text-base text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
+                            Tips Dekorasi Rumah Minimalis Modern
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                            Mau makan sepuasnya tanpa khawatir kantong jebol? Ini dia daftar restoran AYCE favorit dengan harga terjangkau.
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-gray-500">
-                            <span><i class="far fa-calendar mr-1"></i>9 Nov 2025</span>
-                            <span><i class="far fa-eye mr-1"></i>12.3K views</span>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span><i class="far fa-calendar mr-1"></i>30 Okt 2025</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <!-- News Card 3 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover cursor-pointer" onclick="openArticle('news-3')" data-category="teknologi">
-                    <img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=250&fit=crop" 
-                         alt="News 3" 
-                         class="w-full h-48 object-cover">
-                    <div class="p-5">
-                        <span class="inline-block bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                            <i class="fas fa-laptop mr-1"></i>TEKNOLOGI
-                        </span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
-                            Smartphone Flagship Terbaru 2025 yang Layak Dibeli
+                <a href="article.html?id=lifestyle-5" class="flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=225&fit=crop" alt="Lifestyle" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="inline-block bg-purple-100 text-purple-700 px-2 py-1 rounded text-xs font-semibold mb-2">LIFESTYLE</span>
+                        <h3 class="font-bold text-base text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
+                            Rekomendasi Gadget Kekinian untuk Produktivitas
                         </h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                            Review lengkap smartphone flagship terbaru dengan spesifikasi gahar dan fitur canggih untuk tahun 2025.
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-gray-500">
-                            <span><i class="far fa-calendar mr-1"></i>8 Nov 2025</span>
-                            <span><i class="far fa-eye mr-1"></i>20.1K views</span>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span><i class="far fa-calendar mr-1"></i>29 Okt 2025</span>
                         </div>
                     </div>
-                </div>
-
-                <!-- News Card 4 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover cursor-pointer" onclick="openArticle('news-4')" data-category="travel">
-                    <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=400&h=250&fit=crop" 
-                         alt="News 4" 
-                         class="w-full h-48 object-cover">
-                    <div class="p-5">
-                        <span class="inline-block bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                            <i class="fas fa-plane mr-1"></i>TRAVEL
-                        </span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
-                            Pantai Tersembunyi di Sekitar Jakarta yang Wajib Dikunjungi
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                            Liburan ke pantai tanpa perlu jauh-jauh! Ini dia pantai cantik yang bisa ditempuh dalam 3 jam dari Jakarta.
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-gray-500">
-                            <span><i class="far fa-calendar mr-1"></i>7 Nov 2025</span>
-                            <span><i class="far fa-eye mr-1"></i>9.8K views</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- News Card 5 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover cursor-pointer" onclick="openArticle('news-5')" data-category="olahraga">
-                    <img src="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=400&h=250&fit=crop" 
-                         alt="News 5" 
-                         class="w-full h-48 object-cover">
-                    <div class="p-5">
-                        <span class="inline-block bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                            <i class="fas fa-futbol mr-1"></i>OLAHRAGA
-                        </span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
-                            Timnas Indonesia Lolos ke Final Piala AFF 2025
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                            Garuda Muda berhasil mengalahkan Thailand 2-1 dan melaju ke final. Inilah momen bersejarah sepak bola Indonesia!
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-gray-500">
-                            <span><i class="far fa-calendar mr-1"></i>6 Nov 2025</span>
-                            <span><i class="far fa-eye mr-1"></i>45.2K views</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- News Card 6 -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden card-hover cursor-pointer" onclick="openArticle('news-6')" data-category="berita">
-                    <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&h=250&fit=crop" 
-                         alt="News 6" 
-                         class="w-full h-48 object-cover">
-                    <div class="p-5">
-                        <span class="inline-block bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-semibold mb-3">
-                            <i class="fas fa-newspaper mr-1"></i>BERITA
-                        </span>
-                        <h3 class="font-bold text-lg text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
-                            Ekonomi Indonesia Tumbuh 5.8% di Kuartal Ketiga 2025
-                        </h3>
-                        <p class="text-gray-600 text-sm mb-4 line-clamp-2">
-                            Pertumbuhan ekonomi Indonesia mencatat rekor baru didorong oleh sektor konsumsi dan investasi yang kuat.
-                        </p>
-                        <div class="flex items-center justify-between text-sm text-gray-500">
-                            <span><i class="far fa-calendar mr-1"></i>5 Nov 2025</span>
-                            <span><i class="far fa-eye mr-1"></i>18.7K views</span>
-                        </div>
-                    </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Video Section -->
-    <section id="video" class="py-12 bg-gray-100">
+    <!-- Horizontal Scroll Section - Kuliner -->
+    <section id="kuliner" class="py-12">
         <div class="container mx-auto px-6">
-            <div class="flex items-center justify-between mb-8">
-                <h2 class="text-3xl font-bold text-gray-900">
-                    <i class="fas fa-play-circle text-red-600 mr-2"></i>Video Pilihan
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">
+                    <i class="fas fa-utensils text-orange-600 mr-2"></i>Kuliner & Makanan
                 </h2>
-                <button onclick="showNotification('Fitur video akan segera hadir!')" class="text-news-blue font-semibold hover:text-news-dark transition-colors">
+                <button onclick="scrollToSection('terkini')" class="text-news-blue font-semibold hover:text-news-dark transition-colors">
                     Lihat Semua <i class="fas fa-arrow-right ml-1"></i>
                 </button>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover cursor-pointer" onclick="showNotification('Video akan diputar...')">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&h=350&fit=crop" 
-                             alt="Video" 
-                             class="w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
-                                <i class="fas fa-play text-white text-2xl ml-1"></i>
-                            </div>
-                        </div>
-                        <span class="absolute bottom-4 right-4 bg-black bg-opacity-75 text-white px-3 py-1 rounded text-sm">
-                            <i class="fas fa-clock mr-1"></i>12:45
-                        </span>
+            <div class="scroll-container flex gap-4 pb-4">
+                <a href="article.html?id=kuliner-1" class="flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=225&fit=crop" alt="Kuliner" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-bold text-lg text-gray-900 mb-2">
-                            Vlog: Keliling 10 Tempat Nongkrong Hits di Jakarta!
+                    <div class="p-4">
+                        <span class="inline-block bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold mb-2">KULINER</span>
+                        <h3 class="font-bold text-base text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
+                            Street Food Terenak di Jakarta yang Murah Meriah
                         </h3>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <span><i class="far fa-eye mr-1"></i>125K views</span>
-                            <span class="mx-2">•</span>
-                            <span>2 hari lalu</span>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span><i class="far fa-calendar mr-1"></i>28 Okt 2025</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white rounded-xl overflow-hidden shadow-lg card-hover cursor-pointer" onclick="showNotification('Video akan diputar...')">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=350&fit=crop" 
-                             alt="Video" 
-                             class="w-full h-64 object-cover">
-                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-                            <div class="w-20 h-20 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition-colors">
-                                <i class="fas fa-play text-white text-2xl ml-1"></i>
-                            </div>
-                        </div>
-                        <span class="absolute bottom-4 right-4 bg-black bg-opacity-75 text-white px-3 py-1 rounded text-sm">
-                            <i class="fas fa-clock mr-1"></i>8:23
-                        </span>
+                <a href="article.html?id=kuliner-2" class="flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=225&fit=crop" alt="Kuliner" class="w-full h-full object-cover">
                     </div>
-                    <div class="p-5">
-                        <h3 class="font-bold text-lg text-gray-900 mb-2">
-                            Mukbang: Cobain Kuliner Legendaris Jakarta
+                    <div class="p-4">
+                        <span class="inline-block bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold mb-2">KULINER</span>
+                        <h3 class="font-bold text-base text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
+                            Rekomendasi Restoran Jepang Autentik di Jakarta
                         </h3>
-                        <div class="flex items-center text-sm text-gray-500">
-                            <span><i class="far fa-eye mr-1"></i>89K views</span>
-                            <span class="mx-2">•</span>
-                            <span>3 hari lalu</span>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span><i class="far fa-calendar mr-1"></i>27 Okt 2025</span>
                         </div>
                     </div>
-                </div>
+                </a>
+
+                <a href="article.html?id=kuliner-3" class="flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&h=225&fit=crop" alt="Kuliner" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="inline-block bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold mb-2">KULINER</span>
+                        <h3 class="font-bold text-base text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
+                            Kafe dengan View Terbaik di Jakarta Selatan
+                        </h3>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span><i class="far fa-calendar mr-1"></i>26 Okt 2025</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="article.html?id=kuliner-4" class="flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=225&fit=crop" alt="Kuliner" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="inline-block bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold mb-2">KULINER</span>
+                        <h3 class="font-bold text-base text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
+                            Dessert Box Hits yang Lagi Viral di Jakarta
+                        </h3>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span><i class="far fa-calendar mr-1"></i>25 Okt 2025</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="article.html?id=kuliner-5" class="flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden card-hover">
+                    <div class="aspect-video w-full overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=400&h=225&fit=crop" alt="Kuliner" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4">
+                        <span class="inline-block bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold mb-2">KULINER</span>
+                        <h3 class="font-bold text-base text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
+                            Burger Terenak di Jakarta yang Wajib Dicoba
+                        </h3>
+                        <div class="flex items-center text-xs text-gray-500">
+                            <span><i class="far fa-calendar mr-1"></i>24 Okt 2025</span>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Popular Section -->
-    <section class="py-12">
+    <section class="py-12 bg-gray-100">
         <div class="container mx-auto px-6">
             <div class="flex items-center justify-between mb-8">
                 <h2 class="text-3xl font-bold text-gray-900">
@@ -477,10 +425,10 @@
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-4 gap-6">
-                <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-shadow cursor-pointer" onclick="openArticle('popular-1')">
-                    <div class="flex items-start gap-4">
-                        <span class="text-4xl font-bold text-news-blue">1</span>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="article.html?id=popular-1" class="bg-white rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow block">
+                    <div class="flex items-start gap-3">
+                        <span class="text-3xl font-bold text-news-blue">1</span>
                         <div>
                             <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
                                 10 Tempat Nongkrong Hits di Jakarta
@@ -488,11 +436,11 @@
                             <span class="text-sm text-gray-500"><i class="far fa-eye mr-1"></i>15.2K views</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-shadow cursor-pointer" onclick="openArticle('popular-2')">
-                    <div class="flex items-start gap-4">
-                        <span class="text-4xl font-bold text-gray-400">2</span>
+                <a href="article.html?id=popular-2" class="bg-white rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow block">
+                    <div class="flex items-start gap-3">
+                        <span class="text-3xl font-bold text-gray-400">2</span>
                         <div>
                             <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
                                 Kuliner Khas Jakarta yang Legendaris
@@ -500,11 +448,11 @@
                             <span class="text-sm text-gray-500"><i class="far fa-eye mr-1"></i>12.8K views</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-shadow cursor-pointer" onclick="openArticle('popular-3')">
-                    <div class="flex items-start gap-4">
-                        <span class="text-4xl font-bold text-gray-400">3</span>
+                <a href="article.html?id=popular-3" class="bg-white rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow block">
+                    <div class="flex items-start gap-3">
+                        <span class="text-3xl font-bold text-gray-400">3</span>
                         <div>
                             <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
                                 Smartphone Terbaik 2025
@@ -512,11 +460,11 @@
                             <span class="text-sm text-gray-500"><i class="far fa-eye mr-1"></i>11.5K views</span>
                         </div>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white rounded-xl p-5 shadow-md hover:shadow-xl transition-shadow cursor-pointer" onclick="openArticle('popular-4')">
-                    <div class="flex items-start gap-4">
-                        <span class="text-4xl font-bold text-gray-400">4</span>
+                <a href="article.html?id=popular-4" class="bg-white rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow block">
+                    <div class="flex items-start gap-3">
+                        <span class="text-3xl font-bold text-gray-400">4</span>
                         <div>
                             <h4 class="font-bold text-gray-900 mb-2 line-clamp-2 hover:text-news-blue transition-colors">
                                 Wisata Pantai Dekat Jakarta
@@ -524,7 +472,7 @@
                             <span class="text-sm text-gray-500"><i class="far fa-eye mr-1"></i>9.8K views</span>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -538,13 +486,13 @@
                 <p class="text-news-light mb-8">
                     Dapatkan berita terbaru dan artikel menarik langsung ke email Anda setiap hari!
                 </p>
-                <div class="flex gap-3 max-w-md mx-auto">
+                <div class="max-w-md mx-auto">
                     <input type="email" 
                            placeholder="Masukkan email Anda..." 
-                           class="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
+                           class="w-full px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-2 focus:ring-white mb-3"
                            id="newsletterEmail">
-                    <button onclick="subscribeNewsletter()" class="bg-white text-news-blue px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors whitespace-nowrap">
-                        <i class="fas fa-paper-plane mr-2"></i>Subscribe
+                    <button onclick="subscribeNewsletter()" class="w-full bg-white text-news-blue px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-paper-plane mr-2"></i>Subscribe Sekarang
                     </button>
                 </div>
             </div>
@@ -582,12 +530,12 @@
                 <div>
                     <h3 class="font-bold text-lg mb-4">Kategori</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" onclick="filterCategory('berita')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Berita Utama</a></li>
-                        <li><a href="#" onclick="filterCategory('lifestyle')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Lifestyle</a></li>
-                        <li><a href="#" onclick="filterCategory('kuliner')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Kuliner</a></li>
-                        <li><a href="#" onclick="filterCategory('travel')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Travel</a></li>
-                        <li><a href="#" onclick="filterCategory('teknologi')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Teknologi</a></li>
-                        <li><a href="#" onclick="filterCategory('olahraga')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Olahraga</a></li>
+                        <li><a href="#" onclick="scrollToSection('terkini')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Berita Utama</a></li>
+                        <li><a href="#" onclick="scrollToSection('lifestyle')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Lifestyle</a></li>
+                        <li><a href="#" onclick="scrollToSection('kuliner')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Kuliner</a></li>
+                        <li><a href="#" onclick="scrollToSection('terkini')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Travel</a></li>
+                        <li><a href="#" onclick="scrollToSection('terkini')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Teknologi</a></li>
+                        <li><a href="#" onclick="scrollToSection('terkini')" class="hover:text-white transition-colors"><i class="fas fa-chevron-right mr-2 text-xs"></i>Olahraga</a></li>
                     </ul>
                 </div>
                 
@@ -637,6 +585,25 @@
     </a>
 
     <script>
+        // Check if first visit
+        let hasShownWelcome = sessionStorage.getItem('welcomeShown');
+
+        // All articles data for search
+        const articlesData = [
+            { id: 'news-1', title: 'Cafe Aesthetic di Jakarta untuk Konten Instagram', category: 'lifestyle' },
+            { id: 'news-2', title: 'Rekomendasi Restoran All You Can Eat Terbaik', category: 'kuliner' },
+            { id: 'news-3', title: 'Smartphone Flagship Terbaru 2025 yang Layak Dibeli', category: 'teknologi' },
+            { id: 'news-4', title: 'Pantai Tersembunyi di Sekitar Jakarta', category: 'travel' },
+            { id: 'news-5', title: 'Timnas Indonesia Lolos ke Final Piala AFF 2025', category: 'olahraga' },
+            { id: 'news-6', title: 'Ekonomi Indonesia Tumbuh 5.8% di Kuartal Ketiga 2025', category: 'berita' },
+            { id: 'news-7', title: 'Tips Gaya Hidup Sehat untuk Generasi Milenial', category: 'lifestyle' },
+            { id: 'news-8', title: 'Warung Makan Legendaris di Jakarta', category: 'kuliner' },
+            { id: 'lifestyle-1', title: '10 Destinasi Liburan Romantis untuk Pasangan', category: 'lifestyle' },
+            { id: 'lifestyle-2', title: 'Tren Fashion 2025 yang Wajib Kamu Tahu', category: 'lifestyle' },
+            { id: 'kuliner-1', title: 'Street Food Terenak di Jakarta yang Murah Meriah', category: 'kuliner' },
+            { id: 'kuliner-2', title: 'Rekomendasi Restoran Jepang Autentik di Jakarta', category: 'kuliner' }
+        ];
+
         // Mobile Menu Toggle
         function toggleMobileMenu() {
             const menu = document.getElementById('mobileMenu');
@@ -646,9 +613,16 @@
         // Search Toggle
         function toggleSearch() {
             const searchBar = document.getElementById('searchBar');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            
             searchBar.classList.toggle('hidden');
+            
             if (!searchBar.classList.contains('hidden')) {
-                searchBar.querySelector('input').focus();
+                searchInput.focus();
+            } else {
+                searchInput.value = '';
+                searchResults.classList.add('hidden');
             }
         }
 
@@ -660,49 +634,53 @@
         }
 
         function performSearch() {
-            const input = document.querySelector('#searchBar input');
-            const query = input.value.trim();
+            const input = document.getElementById('searchInput');
+            const query = input.value.trim().toLowerCase();
+            const searchResults = document.getElementById('searchResults');
+            const searchResultsList = document.getElementById('searchResultsList');
+            const searchQuery = document.getElementById('searchQuery');
+            
             if (query) {
-                showNotification(`🔍 Mencari: "${query}"...`);
-                // Simulate search
-                setTimeout(() => {
-                    showNotification(`Ditemukan 24 hasil untuk "${query}"`);
-                }, 1000);
+                // Filter articles
+                const results = articlesData.filter(article => 
+                    article.title.toLowerCase().includes(query) || 
+                    article.category.toLowerCase().includes(query)
+                );
+                
+                // Display results
+                searchQuery.textContent = query;
+                searchResultsList.innerHTML = '';
+                
+                if (results.length > 0) {
+                    results.forEach(article => {
+                        const resultItem = document.createElement('a');
+                        resultItem.href = `article.html?id=${article.id}`;
+                        resultItem.className = 'block p-3 hover:bg-gray-100 rounded-lg transition-colors';
+                        resultItem.innerHTML = `
+                            <div class="flex items-center gap-3">
+                                <i class="fas fa-file-alt text-news-blue"></i>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm">${article.title}</h4>
+                                    <span class="text-xs text-gray-500 uppercase">${article.category}</span>
+                                </div>
+                            </div>
+                        `;
+                        searchResultsList.appendChild(resultItem);
+                    });
+                    
+                    searchResults.classList.remove('hidden');
+                    showNotification(`✅ Ditemukan ${results.length} hasil untuk "${query}"`);
+                } else {
+                    searchResultsList.innerHTML = '<p class="text-gray-500 text-sm text-center py-4">Tidak ada hasil ditemukan</p>';
+                    searchResults.classList.remove('hidden');
+                    showNotification(`⚠️ Tidak ada hasil untuk "${query}"`);
+                }
             }
         }
 
-        // Category Filter
-        function filterCategory(category) {
-            // Update active button
-            const buttons = document.querySelectorAll('.category-chip');
-            buttons.forEach(btn => {
-                btn.classList.remove('bg-news-blue', 'text-white');
-                btn.classList.add('bg-gray-200', 'text-gray-700');
-            });
-            event.target.classList.remove('bg-gray-200', 'text-gray-700');
-            event.target.classList.add('bg-news-blue', 'text-white');
-
-            // Filter cards
-            const cards = document.querySelectorAll('#newsGrid > div');
-            cards.forEach(card => {
-                if (category === 'semua' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                    card.classList.add('animate-fade-in');
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            showNotification(`📂 Menampilkan kategori: ${category.toUpperCase()}`);
-            scrollToSection('terkini');
-        }
-
-        // Open Article
-        function openArticle(articleId) {
-            showNotification(`📰 Membuka artikel...`);
-            setTimeout(() => {
-                showNotification('Artikel akan segera ditampilkan!');
-            }, 800);
+        // Go to Article
+        function goToArticle(articleId) {
+            window.location.href = `article.html?id=${articleId}`;
         }
 
         // Load More News
@@ -790,31 +768,17 @@
             }
         });
 
-        // Smooth Scroll for All Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    const offset = 100;
-                    const elementPosition = target.getBoundingClientRect().top + window.pageYOffset;
-                    window.scrollTo({
-                        top: elementPosition - offset,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
         // Page Load
         window.addEventListener('load', function() {
             console.log('✅ Halaman berhasil dimuat!');
-            console.log('✅ Semua fitur interaktif berfungsi dengan baik!');
             
-            // Welcome notification
-            setTimeout(() => {
-                showNotification('👋 Selamat datang di Sukarasa News!');
-            }, 500);
+            // Welcome notification - only show once per session
+            if (!hasShownWelcome) {
+                setTimeout(() => {
+                    showNotification('👋 Selamat datang di Sukarasa News!');
+                    sessionStorage.setItem('welcomeShown', 'true');
+                }, 500);
+            }
         });
 
         // Close mobile menu when clicking outside
@@ -826,6 +790,18 @@
                 if (!menu.classList.contains('-translate-x-full')) {
                     toggleMobileMenu();
                 }
+            }
+        });
+
+        // Close search when clicking outside
+        document.addEventListener('click', function(event) {
+            const searchBar = document.getElementById('searchBar');
+            const searchButton = event.target.closest('button[onclick="toggleSearch()"]');
+            
+            if (!searchBar.classList.contains('hidden') && 
+                !searchBar.contains(event.target) && 
+                !searchButton) {
+                toggleSearch();
             }
         });
     </script>
